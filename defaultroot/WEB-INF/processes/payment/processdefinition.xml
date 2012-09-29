@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="" name="payment">
+	<start-state name="填写报销单">
+		<task name="填写报销单">
+			<description>payment.write.bill</description>
+			<controller>
+				<variable access="write" name="title"></variable>
+				<variable access="write" name="moneyCount"></variable>
+				<variable access="write" name="remark"></variable>
+			</controller>
+		</task>
+		<transition name="" to="部门经理审批"></transition>
+	</start-state>
+	<task-node name="部门经理审批">
+		<task name="部门经理审批">
+			<description>payment.manager.approve</description>
+			<assignment
+				class="com.kurui.kums.workflow.jbpm.action.ManagerAssignment">
+			</assignment>
+			<controller>
+				<variable access="read" name="title"></variable>
+				<variable access="read" name="moneyCount"></variable>
+				<variable access="read" name="remark"></variable>
+				<variable access="read" name="issueperson"></variable>
+			</controller>
+		</task>
+		<transition name="agree" to="判断报销金额"></transition>
+		<transition name="disagree" to="通知报销人报销结果"></transition>
+	</task-node>
+	<decision name="判断报销金额"
+		expression='#{moneyCount&gt;1000?"morthousand":"lessthousand"}'>
+
+		<transition name="" to="总经理审批"></transition>
+		<transition name="lessthousand" to="财务处理"></transition>
+	</decision>
+	<task-node name="总经理审批">
+		<task name="总经理审批">
+			<description>payment.super.manager.approve</description>
+			<assignment actor-id="supermanager"></assignment>
+			<controller>
+				<variable access="read" name="title"></variable>
+				<variable access="read" name="moneyCount"></variable>
+				<variable access="read" name="remark"></variable>
+				<variable access="read" name="issueperson"></variable>
+			</controller>
+		</task>
+		<transition name="" to="财务处理"></transition>
+	</task-node>
+	<task-node name="财务处理">
+		<task name="财务处理">
+			<description>payment.cashier.process</description>
+			<controller>
+				<variable access="read" name="title"></variable>
+				<variable access="read" name="moneyCount"></variable>
+				<variable access="read" name="remark"></variable>
+				<variable access="read" name="issueperson"></variable>
+			</controller>
+		</task>
+		<transition name="" to="通知报销人报销结果"></transition>
+	</task-node>
+	<node name="通知报销人报销结果">
+		<action name="通知报销人报销结果"
+			class="com.kurui.kums.workflow.jbpm.action.NotifyPaymentAction">
+		</action>
+		<transition name="" to="报销结束"></transition>
+	</node>
+	<end-state name="报销结束"></end-state>
+</process-definition>

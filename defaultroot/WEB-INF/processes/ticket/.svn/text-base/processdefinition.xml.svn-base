@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition
+  xmlns=""  name="ticket">
+   <start-state name="新订单">
+      <transition name="toEntryOrder" to="录入卖出新订单/确认收款"></transition>
+   </start-state>
+   <end-state name="交易结束"></end-state>
+   <fork name="fork1">
+      <transition name="" to="取消卖出订单"></transition>
+      <transition name="toApply" to="申请支付采购订单"></transition>
+   </fork>
+   <join name="join1">
+      <transition name="" to="判断交易结束状态"></transition>
+   </join>
+   <task-node name="取消卖出订单">
+      <transition name="" to="确认付退款"></transition>
+   </task-node>
+   <task-node name="申请支付采购订单">
+      <transition name="" to="fork3"></transition>
+   </task-node>
+   <task-node name="确认支付">
+      <transition name="" to="fork2"></transition>
+   </task-node>
+   <task-node name="确认出票">
+      <transition name="" to="join1"></transition>
+   </task-node>
+   <task-node name="取消出票">
+      <transition name="" to="确认收退款"></transition>
+   </task-node>
+   <fork name="fork2">
+      <transition name="" to="取消出票"></transition>
+      <transition name="tr2" to="确认出票"></transition>
+   </fork>
+   <task-node name="取消支付">
+      <transition name="" to="join1"></transition>
+   </task-node>
+   <fork name="fork3">
+      <transition name="" to="取消支付"></transition>
+      <transition name="tr2" to="锁定"></transition>
+   </fork>
+   <task-node name="锁定">
+      <transition name="" to="fork4"></transition>
+   </task-node>
+   <task-node name="确认收退款">
+      <transition name="" to="join1"></transition>
+   </task-node>
+   <fork name="fork4">
+      <transition name="" to="确认支付"></transition>
+      <transition name="tr2" to="解锁"></transition>
+      <transition name="tr3" to="取消支付"></transition>
+   </fork>
+   <task-node name="解锁">
+      <transition name="" to="申请支付采购订单"></transition>
+   </task-node>
+   <task-node name="录入卖出新订单/确认收款">
+      <transition name="" to="fork1"></transition>
+   </task-node>
+   <decision name="判断交易结束状态">
+      <transition name="" to="交易结束"></transition>
+   </decision>
+   <task-node name="确认付退款">
+      <transition name="" to="join1"></transition>
+   </task-node>
+</process-definition>

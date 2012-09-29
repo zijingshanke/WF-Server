@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-diagram name="payment" width="805" height="421">
+  <node name="填写报销单" x="47" y="29" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="部门经理审批" x="228" y="29" width="140" height="40">
+    <transition name="agree">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="disagree">
+      <label x="5" y="-10"/>
+      <bendpoint w1="-1" h1="187" w2="-284" h2="0"/>
+    </transition>
+  </node>
+  <node name="判断报销金额" x="473" y="29" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="lessthousand">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="总经理审批" x="664" y="30" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+      <bendpoint w1="1" h1="98" w2="189" h2="-4"/>
+    </transition>
+  </node>
+  <node name="财务处理" x="476" y="132" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="通知报销人报销结果" x="480" y="215" width="140" height="40">
+    <transition name="">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+  <node name="报销结束" x="482" y="300" width="140" height="40"/>
+</process-diagram>

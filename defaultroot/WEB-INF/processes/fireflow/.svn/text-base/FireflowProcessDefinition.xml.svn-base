@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fpdl:WorkflowProcess PUBLIC "-//Nieyun Chen//ProcessDefinition//CN" "FireFlow_Process_Definition_Language.dtd">
+
+<fpdl:WorkflowProcess xmlns:fpdl="http://www.fireflow.org/Fireflow_Process_Definition_Language" Id="FireflowProcessDefinition" Name="FireflowProcessDefinition" DisplayName="FireflowProcessDefinition" ResourceFile="">
+    <fpdl:StartNode Id="FireflowProcessDefinition.START_NODE" Name="START_NODE">
+        <fpdl:ExtendedAttributes>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="0"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="0"/>
+        </fpdl:ExtendedAttributes>
+    </fpdl:StartNode>
+    <fpdl:Activities>
+        <fpdl:Activity Id="FireflowProcessDefinition.ShouLi" Name="ShouLi" DisplayName="受理" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="59"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="149"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="140"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks>
+                <fpdl:Task Id="FireflowProcessDefinition.ShouLi.ShouLi-Task" Name="ShouLi-Task" DisplayName="登记XX业务申请" Type="FORM" CompletionStrategy="ANY" DefaultView="VIEWFORM" Priority="1" Execution="SYNCHR">
+                    <fpdl:Performer Name="ShouLi-Role" DisplayName="受理岗">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:AssignmentHandler>com.kurui.kums.workflow.fireflow.action.ShouLiAssignmentHandler</fpdl:AssignmentHandler>
+                    </fpdl:Performer>
+                </fpdl:Task>
+            </fpdl:Tasks>
+        </fpdl:Activity>
+        <fpdl:Activity Id="FireflowProcessDefinition.HeCha" Name="HeCha" DisplayName="核查" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="90"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="160"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="378"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks>
+                <fpdl:Task Id="FireflowProcessDefinition.HeCha.HeCha-Task" Name="HeCha-Task" DisplayName="调用XX接口进行核查" Type="TOOL" CompletionStrategy="ANY" DefaultView="VIEWFORM" Priority="1" Execution="SYNCHR"/>
+            </fpdl:Tasks>
+        </fpdl:Activity>
+    </fpdl:Activities>
+    <fpdl:EndNodes/>
+</fpdl:WorkflowProcess>
